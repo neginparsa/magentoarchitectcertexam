@@ -3,44 +3,87 @@ Exam Objectives and Scope
 Section 1: Magento Architecture (6%)	
 
 1.1 Determine advanced uses of the Magento configuration system
-
+============================================================================
 •	Understand how to create a custom config file. 
-
+============================================================================
 Demonstrate an understanding of the Magento Configuration files framework
+============================================================================
 •	Understand how to create a custom config file with validation and a unique node that is overridden on merging
+============================================================================
 •	Understand how to create a config file with a remote schema
+============================================================================
 •	1.2 Demonstrate an ability to design complex customizations using plugins and di.xml
+============================================================================
 •	Plugins sort order, plugin on plugin scenario, plugin debugging techniques. Demonstrate an understanding of virtual types, shared objects, object instantiation process, proxies, factories
 •	How does an around plugin modify the plugin execution order?
+============================================================================
 •	How do you debug a plugin that is not executed?
+============================================================================
 •	Demonstrate Plugin on Plugin examples
+============================================================================
 •	Which classes are instantiated outside of the ObjectManager so they cannot be customizing using di.xml?
+============================================================================
 •	Demonstrate a use case for a virtual type (different instances of a class with a different set of arguments)
+============================================================================
 •	1.3 Demonstrate understanding of Magento events processing
+============================================================================
 •	Demonstrate an understanding of the events processing flow. Influence of Staging on the event processing
+============================================================================
 •	What is a modification of the event processing mechanism introduced by the staging module?
+============================================================================
 •	1.4 Demonstrate an ability to use the Magento command-line interface
+============================================================================
 •	Create a new CLI command, emulate different areas within it
+============================================================================
 •	Create a new CLI-command, configure it in di.xml, add optional/required options/keys
+============================================================================
 •	Environment specification using Area class
+============================================================================
 •	Environment emulation for a section of code
-
+============================================================================
 
 
 Section 2: Magento UI (7%)
 2.1 Demonstrate understanding UiComponents architecture
+================================================================
+Magento UI components are used to represent distinct UI elements, such as tables, buttons, dialogs, and others.
+
+They are designed for simple and flexible user interface (UI) rendering. Components are responsible for rendering result page fragments and providing/supporting further interactions of JavaScript components and server.
+
+Magento UI components are implemented as a standard module named Magento_UI.
+
+============================================================================
+
 UiComponent workflow, initialization, execution, configuration structure, data loading process
+
+
+============================================================================
 Retrieving a UiCompnent's instance from the uiRegistry
+============================================================================
+
+
 Understand the difference between executing a data provider component and loading data
+============================================================================
 Describe the role of UiComponent PHP classes
+============================================================================
+
 Understand the uiClass instance, extending uiComponent
+============================================================================
+
 2.2 Demonstrate advanced use of Magento layouts
+============================================================================
 Non-standard layouts, custom handles, debugging layouts
+============================================================================
 Add a custom handle, obtain a list of handles loaded for a page
+============================================================================
 Obtain the layout XML for a page
+============================================================================
 Containers elements with a wrapping DIV tag
+============================================================================
 Dynamically modify the layout tree
+============================================================================
 2.3 Demonstrate an ability to operate with Magento blocks and templates
+============================================================================
 Block caching, fallback debugging, email templates, translations
 Cache all instances of the block, specific instance
 Assign an object to the email template. Render different images depending on a locale in the email template
@@ -66,10 +109,15 @@ High level staging implementation overview
 3.3 Demonstrate an ability to use different types of setup scripts in Magento
 Schema and data setup scripts, uninstall scripts, recurring scripts, uninstall schema vs. uninstall data
 What happens when an uninstall script is executed: data version change, deleted tables, etc.
+============================================================================
 Recurring scripts and their order in the setup:upgrade process
+============================================================================
 Accessing areas and system configuration values in setup scripts
+============================================================================
 Section 4: Using the Entity-Attribute-Value (EAV) Model (10%)
+============================================================================
 4.1 Describe the EAV data access process in Magento
+============================================================================
 Getting an attribute instance, impact of attribute sets, large number of attributes and attribute sets
 What is the impact of 10,000 attribute sets? 1,000 attributes in a set?
 How to get information about an attribute
@@ -113,10 +161,15 @@ Customization of inline editing in a grid; for example, a file uploader
 Bookmark filters selection for a grid
 Grid meta information: adding a new column that requires a join to another table
 Section 6: Customizing the Catalog (23%)
+============================================================================
 6.1 Demonstrate an ability to understand and customize Magento products
+============================================================================
 Selecting the right product type for a given requirement (configurable with custom options, bundle with grouped). Deciding to use non-standard products: for example, for licenses, subscriptions, courseware, or glasses. Product relations (related, upsells).
+============================================================================
 Select a product type for a subscription/subscription bundled with a physical product
+============================================================================
 Select a product type for courseware
+============================================================================
 Select a product type for glasses with a prescription
 Compare custom options with configurable products
 Configurable product with custom options for the associated simple products
@@ -132,114 +185,281 @@ The Magento\Framework\Price\* component and its extension in the Catalog module
 How to render a product price: which class to use, which data needs to be provided
 Indexed price vs. prices calculated on the fly
 Price configuration: tier prices, special price, custom option, configurable adjustment, catalog rules, cart rules
+============================================================================
 How to change the price rendering process for a given product type/product instance
+============================================================================
 How to add a custom price adjustment to modify the calculation process. What happens if the price index is not aligned with this change?
+============================================================================
 6.3 Customize catalog price rules
+============================================================================
 Programmatically create a catalog price rule, the impact of catalog price rules on performance, extending catalog price rule conditions with custom entities
+============================================================================
+============================================================================
 6.4 Determine how to use Magento categories
+============================================================================
 Advanced category features: hierarchy, custom attributes, impact on performance
+============================================================================
+============================================================================
 What happens if a project has many categories?
+============================================================================
 Dynamic rules for the order of products in category
+============================================================================
 The category is_anchor attribute and its effect on performance
+============================================================================
+
+If is_anchor = yes, all the products for the current category and all children categories display, along with the layered navigation if filterable attributes are setup allowing you to filter the products.
+
+============================================================================
 6.5 Demonstrate an understanding of catalog indexers
+============================================================================
+
+
+
+============================================================================
 The indexing framework, the price indexer, the inventory indexer, the EAV indexer. How does Magento use indexed data?
+============================================================================
 Estimate indexing customization efforts when making architectural decisions. Estimate indexing process complexity and time for different given conditions. The impact of indexing for frequent catalog updates.
 What steps does Magento perform when indexing? What is the role of the indexer_state table
+============================================================================
 How to register a new indexer
+============================================================================
+Declare a new indexer process in the etc/indexer.xml file with the following attributes:
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="design_config_grid" view_id="design_config_dummy" class="Magento\Theme\Model\Indexer\Design\Config" primary="design_config">
+        ...
+    </indexer>
+</config>
+========================================================================================================================================================
 How does the price indexer work? Which events trigger it? How do different product types declare their indexers? How important is an order of indexers in price indexing?
+============================================================================
 Inventory indexer overview, inventory indexing for different product types
+============================================================================
 What is the scope of a price in the price index? How difficult is it to extend the scope of an index?
+============================================================================
 Impact of many stores/websites on price indexing
+============================================================================
 Custom price modifiers: Pros and cons of customizing the index versus adjusting the native features like price rules or custom options
+============================================================================
 6.6 Demonstrate understanding of catalog staging and its impact on the system
+============================================================================
 Flow modifications introduced by staging (triggers, row_id, data versions). Staging-related modifications of the indexing process
+============================================================================
 Issues related to different row_id and entity_id
+============================================================================
 Catalog triggers
+============================================================================
 6.7 Demonstrate an understanding of the product search framework
+============================================================================
 How to customize Elastic search
+============================================================================
 6.8 Demonstrate understanding of importing products and categories in Magento
+============================================================================
 Frequent imports, massive imports, import with many attributes
+============================================================================
 Issues related to a frequent import, for example every minute
+============================================================================
 Compare importing products using the native import, save by model, or custom SQL
+============================================================================
 Specifics of importing a catalog with many attributes and attribute sets
+============================================================================
 Importing categories and product relations
+============================================================================
 Section 7: Customizing the Checkout Process (17%)
+========================================================================================================================================================
 7.1 Understand the Magento quote architecture and customizing quote-related functionality
+============================================================================
 Quote-related objects, total models and the price calculation process, the add to cart process, custom add to cart operations, customizations of the price calculation, taxes and discount, various display settings
+============================================================================
 The quote merge functionality
+============================================================================
 Programmatically add a free gift when a certain condition is met
+============================================================================
 Programmatically set a price for a product
+============================================================================
 Taxes with discounts calculation
+============================================================================
 The impact of many shopping cart price rules on performance
+============================================================================
 Programmatically create shopping cart price rules
+============================================================================
+
+============================================================================
 Importing coupon codes
+============================================================================
+
 Extend the shopping cart price rules with custom entities
+============================================================================
 Programmatically separate line items in the shopping cart so there are two line items instead of one with qty=2
+============================================================================
 Adding a new total model and evaluating its impact on taxes and discounts
+============================================================================
 Shipping discounts behavior and customizations
+============================================================================
 WebAPI for quote operations. Create a quote, add an item, create a coupon, add a discount
+============================================================================
 7.2 Demonstrate an ability to customize and extend the checkout process
+============================================================================
 Checkout steps, the REST API, customizations of the checkout API, the order placement process. The impact of many concurrent order placements
+============================================================================
 Adding a step to the checkout after the payment step, or between the payment and shipping steps
+============================================================================
 Implementing a ""one-click"" checkout, evaluate possible pitfalls such as discounts being applied or canceled when the order is placed
+============================================================================
 The checkout REST API: Modifying the native flow (separate calls to save payment and to place the order)
+============================================================================
 Extending the checkout REST API. Adding new parameters to different API endpoints. Using extension attributes
+============================================================================
 Issues related to simultaneous order placement, inventory locking
-Determining the exact moment when the stock is decremented during an order placement
+============================================================================
+Determining the exact moment when the stock is decremented during an order placement============================================================================
+============================================================================
 Customizing the order placement such that it uses message queues
-Horizontal sharding of orders tables to improve order placement capacity. What challenges need to be resolved?
+============================================================================
+Horizontal sharding of orders tables to improve order placement capacity. What challenges need to be resolved?============================================================================
+============================================================================
 7.3 Create and debug shipping and payment methods in Magento
-Different types of payment methods: gateway, offline, hosted. The gateway payment methods framework. The payment method availability logic. The shipping rates calculation process, debugging shipping rates and table rates customizations
+============================================================================
+Different types of payment methods: gateway, offline, hosted. The gateway payment methods framework. 
+============================================================================
+The payment method availability logic.
+============================================================================
+The shipping rates calculation process, 
+============================================================================
+debugging shipping rates and table rates customizations
+============================================================================
 The gateway framework vs. AbstractMethod
+============================================================================
 The structure of offline payment methods. What makes them "offline"?
+============================================================================
 Partial invoices/refunds for payment methods
+============================================================================
 Add a hosted-type payment method (redirects, custom order review page)
+============================================================================
 Add a new shipping method. Customize the logic for getting a list of available shipping methods
+============================================================================
 The shipping rate calculation flow. Debug shipping rates, identify plugins that that influence the shipping rate calculation process
+============================================================================
 Customizing table rates. Add a new "column" to the "table", change the logic of selecting the rate.
+============================================================================
 Gateway shipping methods. Remote call flow. How to avoid the remote call if it is unnecessary
+============================================================================
+
+
 Section 8: Magento Commerce Features (13%)
+
+
 8.1 Demonstrate an ability to use message queues
+============================================================================
+============================================================================
 Create a listener/publisher. Use cases for using message queues
+========================================================================================================================================================
+============================================================================
+
 How to register a listener/publisher for a queue
+============================================================================
+
+
+============================================================================
 How to configure a queue
+============================================================================
 What is a use case to use message queues?
+============================================================================
 8.2 Demonstrate understanding of customer segmentation
+============================================================================
 Describe the customer segments functionality, its use cases, impact on performance, and programmatical operations with customer segments
+============================================================================
 Programmatically create a customer segment
+============================================================================
 Extend customer segments with new entities or attributes
+============================================================================
 Understand the database structure of customer segments
+============================================================================
 8.3 Demonstrate understanding of advanced capabilities in Magento Commerce
+============================================================================
 Store credits, reward points, RMA, gift cards
+============================================================================
 Compare RMA with refunds
+============================================================================
 Customizing the RMA process
+============================================================================
 Customizing store credits/reward points accrual/spending
+============================================================================
 8.4 Demonstrate understanding of target rules
+============================================================================
 Customer rules database structure, use cases, comparison to other product relations, operate with target rules programmatically
+============================================================================
 Target rules vs. related products
+============================================================================
+Customer Segmentation, Targeted Promotions & Merchandising
+
+Segment customers into groups and optimize marketing initiatives by identifying specific customer groups using specific characteristics 
+(address, location, sex, etc.) and/or value (purchase history, on-site browsing, etc.). 
+Advanced segmentation capabilities include the ability to identify unknown site visitors. 
+Whether they’re new visitors or returning customers who have not logged in, you’ll now be able to identify and target them with 
+special promotions to convert browsers into buyers.
+
+Dynamic Rule Based Product Relations
+
+Dynamically target customers to present up-sells, cross-sells, and related products based on their specific product selections. 
+Rules are easily administered through a condition based tool, allowing marketers to easily manage specific product suggestions, 
+shopping cart price rules and banners to any customer segment to encourage additional purchases.
+============================================================================
 Extending target rules with a custom attribute or a custom entity
+============================================================================
 Create a rule programmatically, understand the database structure of a rule
+============================================================================
 What is the performance impact of having many target rules in the system?
+============================================================================
 How does editing a product or adding new products affect existing target rules?
+============================================================================
 Section 9: Understanding Magento Security (5%)
+============================================================================
 9.1 Demonstrate understanding of frontend security with Magento
+============================================================================
 Filter input and escape output; password and sensitive data hashing; validate user file uploads; how to prevent cross site scripting vulnerabilities
+============================================================================
 How to validate field values before inserting them into the database
+============================================================================
 How to escape output to remove HTML tags
+============================================================================
 Using secure encryption and hashing functions to store sensitive values in the database
+============================================================================
 Validate file uploads, the file type, the file contents, and the file metadata
+============================================================================
 9.2 Demonstrate understanding Adminhtml security with Magento
+============================================================================
 CSRF tokens; stored XSS; adminhtml secret key; security configuration; securing email from injection; preventing admin privilege escalation
+============================================================================
 How to prevent CSRF attacks; the importance of the form_key field in forms
+============================================================================
 How is the admin secret key generated in URLs?
+============================================================================
+
+============================================================================
 Security related admin configurations
+============================================================================
 Security by obscurity, the custom admin path
+============================================================================
 9.3 Demonstrate understanding of different types of attacks and preventing them with Magento
+============================================================================
 Remote code execution; local and remote file inclusions; session hijacking; SQL injection; insecure functions; directory traversal attacks
+============================================================================
 PHP functions that should never be used, per Magento recommendations (eval, serialize, etc.)
+============================================================================
 How to prevent directory traversals attacks when uploading a file
+============================================================================
+
+
+
+============================================================================
 Importance of the HttpOnly property when setting a cookie
+============================================================================
 Serving Magento from the base vs. the pub/ directory
+============================================================================
 Retrieving the user IP from the REMOTE_ADDR header vs. the X-Forwarded-For header
+============================================================================
 File operations influenced by user-submitted request parameters, how to stop directory traversal attacks and restrict access to dirs/files
+============================================================================
 How to write secure SQL queries
+============================================================================
